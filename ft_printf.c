@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 10:50:59 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/15 16:00:49 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/16 14:45:55 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ X : 부호 없는 16진 정수(대문자)
 printf 결과 비교
 */
 
-# define SEPECIFIER "cspdiuxX%"
-
 static int	find_printstr_idx(char *target)
 {
 	int i;
@@ -60,7 +58,7 @@ static int	find_specifier(char *target)
 	i = 1;/* `%` 제외하고 찾기 */
 	while (target[i] != '\0')
 	{
-		if (ft_strchr(SEPECIFIER, target[i]))
+		if (ft_strchr(FT_SEPECIFIER, target[i]))
 			break ;
 		i++;
 	}
@@ -69,23 +67,25 @@ static int	find_specifier(char *target)
 	return (i);
 }
 
-static void print_flag(char flag, va_list ap)
+static void print_format(char *target, va_list ap, int i)
 {
-	if (flag == 'c')
-		ft_printf_c(ap);
-	else if (flag == 's')
-		ft_printf_s(ap);
-	else if (flag == 'p')
-		ft_printf_p(ap);
-	else if (flag == 'd' || flag == 'i')
-		ft_printf_di(ap);
-	else if (flag == 'u' || flag == 'x' || flag == 'X')
-		ft_printf_uxX(ap, flag);
-	else if (flag == '%')
+	if (target[i] == 'c')
+		ft_printf_c(ap, target, i);
+	else if (target[i] == 's')
+		ft_printf_s(ap, target, i);
+	else if (target[i] == 'p')
+		ft_printf_p(ap, target, i);
+	else if (target[i] == 'd' || target[i] == 'i')
+		ft_printf_di(ap, target, i);
+	else if (target[i] == 'u' ||target[i] == 'x' || target[i] == 'X')
+		ft_printf_uxX(ap, target, i);
+	else if (target[i] == '%' && i == 1)
 		ft_putstr_fd("%", 1);
 }
 
-/* 기본서식 : %[플래그][폭][.정밀도][길이]서식지정자 */
+/* 기본서식 : %[플래그][폭][.정밀도,길이]서식지정자 */
+//            %[flag][width][.precision]서식지정자
+// 마지막에 main.c 지우기!!
 int			ft_printf(const char *format, ...)
 {
 	va_list	ap;
@@ -97,14 +97,14 @@ int			ft_printf(const char *format, ...)
 	va_start(ap, format);
 	while (true)
 	{	
-		if ((target = ft_strchr((char *)format, '%')) != NULL)
+		if ((target = ft_strchr((char *)format, '%')) != NULL) // target은 `%`로 시작하는 문자열
 		{
-			if ((i = find_specifier(target)) > 0)
+			if ((i = find_specifier(target)) > 0) // i는 서식지정자 idx
 			{
 				tmp = ft_substr(format, 0, find_printstr_idx((char *)format));
-				ft_putstr_fd(tmp, 1);
+				ft_putstr_fd(tmp, 1);  // 서식지정자 전 까지 출력
 				free(tmp);
-				print_flag(target[i], ap);
+				print_format(target, ap, i);
 				format = target + i + 1;
 			}
 		}

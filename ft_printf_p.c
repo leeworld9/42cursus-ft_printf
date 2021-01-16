@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:57:34 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/15 14:30:54 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/16 05:35:53 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void addr_print(long long addr)
 	}
 }
 
-void ft_printf_p(va_list ap)
+void ft_printf_p(va_list ap, char *target, int i)
 {
 	long long addr;
 	
