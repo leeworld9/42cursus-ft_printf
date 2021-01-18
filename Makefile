@@ -6,7 +6,7 @@
 #    By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 10:51:13 by dohelee           #+#    #+#              #
-#    Updated: 2021/01/15 16:18:19 by dohelee          ###   ########.fr        #
+#    Updated: 2021/01/17 05:40:34 by dohelee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 NAME = libftprintf.a
 AR = ar rcs
-SRCS = ft_printf.c ft_printf_c.c ft_printf_di.c ft_printf_p.c ft_printf_s.c ft_printf_uxX.c
+SRCS = ft_printf.c ft_printf_c.c ft_printf_di.c ft_printf_p.c ft_printf_s.c ft_printf_uxX.c ft_printf_utils.c
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS= $(SRCS_BONUS:.c=.o)
