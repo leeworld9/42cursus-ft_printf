@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:57:28 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/18 21:34:27 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/20 12:21:40 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,41 +43,6 @@ static int hex_print(unsigned int num, char format, int len)
 	}
 	len++;
 	return (len);
-}
-
-static int	ft_nbrlen(long long n)
-{
-	int len;
-
-	len = (n <= 0) ? 1 : 0;
-	while (n != 0)
-	{
-		n = n / 10;
-		len++;
-	}
-	return (len);
-}
-
-static char		*ft_ltoa(long long n)
-{
-	bool	sign;
-	int		len;
-	char	*result;
-
-	sign = (n >= 0) ? true : false;
-	len = ft_nbrlen(n);
-	if ((result = (char *)malloc(sizeof(char) * (len + 1))) == NULL)
-		return (NULL);
-	result[len--] = '\0';
-	while (len >= 0)
-	{
-		result[len] = abs_convert(n % 10) + '0';
-		n = abs_convert(n / 10);
-		len--;
-	}
-	if (sign == false)
-		result[0] = '-';
-	return (result);
 }
 
 int ft_printf_uxX(va_list ap, char *target, int i)

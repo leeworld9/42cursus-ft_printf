@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   ft_ltoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/01 18:58:57 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/20 12:17:18 by dohelee          ###   ########.fr       */
+/*   Created: 2021/01/20 12:24:37 by dohelee           #+#    #+#             */
+/*   Updated: 2021/01/20 13:14:08 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-static int	ft_abs(int n)
+static long long	ft_abs(long long n)
 {
 	return ((n < 0) ? -n : n);
 }
 
-static int	ft_nbrlen(int n)
+static int			ft_nbrlen(long long n)
 {
 	int len;
 
@@ -30,7 +30,7 @@ static int	ft_nbrlen(int n)
 	return (len);
 }
 
-char		*ft_itoa(int n)
+char				*ft_ltoa(long long n)
 {
 	bool	sign;
 	int		len;
