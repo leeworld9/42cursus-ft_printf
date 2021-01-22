@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 21:01:07 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/22 09:42:41 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/22 14:31:32 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,16 @@ void	get_s_maxlen(t_printf *data, int param_len)
 	}
 	else
 	{
-		if (data->width >= data->pres)
+		// w 4 p 7 max?  len = 1  -> width
+		// w 0 p 2 max?  len = 1  -> param+len
+		// w 3 p 2 len 16  -> w    
+		// w 3 p 2 len 1  -> w
+		if (param_len < data->width && param_len < data->pres)
 			data->max_len = data->width;
+		else if (data->width >= data->pres)
+			data->max_len = data->width;
+		else if (param_len < data->pres)
+			data->max_len = param_len;
 		else
 			data->max_len = data->pres;
 	}
@@ -32,13 +40,35 @@ void	get_s_maxlen(t_printf *data, int param_len)
 void	fill_s_result(t_printf *data, char *result, char *param)
 {
 	int len;
-	int i;
+	int param_len;
+	int prs_tmp;
 
+	prs_tmp = data->pres - 1;	
 	len = data->max_len - 1;
-	while (len != -1)
+	param_len = (int)ft_strlen(param);
+	//printf("param_len : %d\n", param_len);
+	if (param_len >= data->pres)
 	{
-		result[len] = param[len];
-		len--;
+		while (data->pres != -1)
+		{
+			result[len] = param[prs_tmp];
+			len--;
+			prs_tmp--;
+			if (prs_tmp == -1)
+				break ;
+		}
 	}
-	return ;
+	else
+	{
+		while (len != -1)
+		{
+			result[len] = param[param_len - 1];
+			len--;
+			param_len--;
+			if (param_len == 0)
+				break;
+		}
+	}
+	
+
 }

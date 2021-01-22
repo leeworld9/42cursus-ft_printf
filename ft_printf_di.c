@@ -6,13 +6,13 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:57:36 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/21 18:39:15 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/22 13:09:35 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	get_flag(t_printf *data)
+void	get_flag(t_printf *data)
 {
 	char	*tmp;
 	int		pres_idx;
@@ -35,7 +35,7 @@ static void	get_flag(t_printf *data)
 		free(tmp);
 }
 
-static void	get_width(va_list ap, t_printf *data)
+void	get_width(va_list ap, t_printf *data)
 {
 	int		pres_idx;
 	char	*tmp;
@@ -58,7 +58,7 @@ static void	get_width(va_list ap, t_printf *data)
 	}
 }
 
-static void	get_pres(va_list ap, t_printf *data)
+void	get_pres(va_list ap, t_printf *data)
 {
 	char	*tmp;
 	int		pres_idx;
@@ -69,7 +69,7 @@ static void	get_pres(va_list ap, t_printf *data)
 	pres_idx = find_chr_idx(data->tag, '.');
 	if (pres_idx != -1 && !ft_strchr(FT_SEPECIFIER, data->tag[pres_idx + 1]))
 	{
-		pres_size = ft_strlen(data->tag) - pres_idx - 1;
+		pres_size = ft_strlen(data->tag) - pres_idx - 2;
 		tmp = ft_substr(data->tag, pres_idx + 1, pres_size);
 		if (tmp[i] != '\0' && ft_strchr(tmp, '*'))
 		{
