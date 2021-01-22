@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 10:51:59 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/22 20:01:53 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/23 07:45:02 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct	s_printf
 	int			minus;
 	long long	param;
 	char		*str_param;
+	void		*void_p;
 	int			max_len;
 }				t_printf;
 

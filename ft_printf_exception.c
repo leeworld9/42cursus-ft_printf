@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 12:50:29 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/22 22:38:19 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/23 07:47:23 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ char	*uxX_exception(t_printf *data, char *result, char *param)
 
 char	*p_exception(t_printf *data, char *result, char *param)
 {
-
 	fill_result(data, result, param);
 	if (data->flag == '-')
 		left_sort(result, data->max_len);

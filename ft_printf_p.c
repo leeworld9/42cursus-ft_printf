@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:57:34 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/22 23:21:27 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/23 08:04:58 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,16 @@ static int	show_result(t_printf *data)
 	char	*param;
 	char	*result;
 	
-	if ((param = (char *)malloc(sizeof(char) * (64/4 + 1))) == NULL)
-		return (0);
-	convert_addr((unsigned int)data->param, param);
-	reverse_arr(param);
+	if (data->void_p != NULL)
+	{
+		data->param = (long long)data->void_p;
+		if ((param = (char *)malloc(sizeof(char) * (64/4 + 1))) == NULL)
+			return (0);
+		convert_addr((unsigned int)data->param, param);
+		reverse_arr(param);
+	}
+	else
+		param = "0x0";
 	get_uxX_maxlen(data, ft_strlen(param));
 	if ((result = (char *)malloc(sizeof(char) * (data->max_len + 1))) == NULL)
 		return (0);
@@ -55,7 +61,8 @@ static int	show_result(t_printf *data)
 		fill_chr(data, data->max_len, result, ' ');
 	result = p_exception(data, result, param);
 	ft_putstr_fd(result, 1);
-	free(param);
+	if (data->void_p != NULL)
+		free(param);
 	free(result);
 	return (data->max_len);
 }
@@ -63,7 +70,6 @@ static int	show_result(t_printf *data)
 int ft_printf_p(va_list ap, char *target, int i)
 {
 	t_printf	*data;
-	void *tmp;
 	int len;
 
 	len = 0;
@@ -78,19 +84,8 @@ int ft_printf_p(va_list ap, char *target, int i)
 	get_width(ap, data);
 	get_pres(ap, data);
 	
-	tmp = va_arg(ap, void *);
-	if (tmp != NULL)
-	{
-		data->param = (long long)tmp;
-		len += show_result(data);
-	}
-	else
-	{
-		// 여기 변경 필요
-		len += show_result(data);
-		//ft_putstr_fd("(nil)", 1);
-		//len += ft_strlen("(nil)");
-	}
+	data->void_p = va_arg(ap, void *);
+	len += show_result(data);
 	free(data->tag);
 	free(data);
 	return (len);
