@@ -6,7 +6,7 @@
 #    By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/14 10:51:13 by dohelee           #+#    #+#              #
-#    Updated: 2021/01/22 20:03:18 by dohelee          ###   ########.fr        #
+#    Updated: 2021/01/23 08:44:49 by dohelee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = libftprintf.a
 AR = ar rcs
 SRCS = ft_printf.c ft_printf_c.c ft_printf_di.c ft_printf_p.c ft_printf_s.c \
 	ft_printf_uxX.c ft_printf_common_utils.c ft_printf_di_utils.c ft_printf_exception.c \
-	ft_printf_s_utils.c ft_printf_uxX_utils.c ft_printf_p_utils.c
+	ft_printf_s_utils.c ft_printf_uxX_utils.c ft_printf_p_utils.c ft_printf_c_utils.c
 
 OBJS = $(SRCS:.c=.o)
 OBJS_BONUS= $(SRCS_BONUS:.c=.o)

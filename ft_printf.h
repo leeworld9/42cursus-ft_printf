@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 10:51:59 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/23 07:45:02 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/23 08:47:54 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct	s_printf
 int ft_printf(const char *format, ...);
 
 //test
-int ft_printf_c(va_list ap);
+int ft_printf_c(va_list ap, char *target, int i);
 int ft_printf_s(va_list ap, char *target, int i);
 int ft_printf_p(va_list ap, char *target, int i);
 int ft_printf_di(va_list ap, char *target, int i);
@@ -69,10 +69,15 @@ void		fill_s_result(t_printf *data, char *result, char *param);
 void		get_uxX_maxlen(t_printf *data, int param_len);
 void		reverse_arr(char *arr);
 
+//cutils 
+void		get_c_maxlen(t_printf *data, int param_len);
+
+
 //exception
 char		*di_exception(t_printf *data, char *result, char *param_abs);
 char		*s_exception(t_printf *data, char *result);
 char		*uxX_exception(t_printf *data, char *result, char *param);
 char		*p_exception(t_printf *data, char *result, char *param);
+char		*c_exception(t_printf *data, char *result, char *param);
 
 #endif

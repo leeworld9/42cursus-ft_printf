@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:57:31 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/22 23:03:21 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/23 08:16:17 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ int ft_printf_s(va_list ap, char *target, int i)
 	if (data->str_param != NULL)
 	{
 		len += show_result(data);
-		// ft_putstr_fd(data->strparam, 1);
-		// len += ft_strlen(data->strparam);
 	}
 	else
 	{
