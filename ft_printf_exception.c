@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 12:50:29 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/22 13:00:07 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/22 22:38:19 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,51 @@ char	*s_exception(t_printf *data, char *result)
 	{
 		if (data->max_len != 0 && data->pres != -1)
 		{
-			fill_s_result(data, result, data->strparam);
+			fill_s_result(data, result, data->str_param);
 		}
-		
 	}
 	else
-		fill_result(data, result, data->strparam);
+		fill_result(data, result, data->str_param);
 
+	if (data->flag == '-')
+		left_sort(result, data->max_len);
+	return (result);
+}
+
+
+char	*uxX_exception(t_printf *data, char *result, char *param)
+{
+	// ㅅㅂ 0일때 예외처리 ㅈ 같네
+	fill_chr(data, data->pres, result, '0');
+	if (data->flag == '0' && data->pres == 0)
+		fill_chr(data, data->width, result, '0');
+	else if (data->max_len == data->pres)
+		fill_chr(data, data->max_len, result, '0');
+	else if (data->pres == -1)
+	{
+		if (data->width > 0 && *param == '0')
+		{
+			fill_chr(data, data->width, result, ' ');
+			return (result);
+		}
+		else if (data->width == 0 && *param == '0')
+		{
+			fill_chr(data, data->max_len, result, '\0');
+			data->max_len--;
+			return (result);
+		}
+	}	
+	fill_result(data, result, param);
+	if (data->flag == '-')
+		left_sort(result, data->max_len);
+	return (result);
+}
+
+
+char	*p_exception(t_printf *data, char *result, char *param)
+{
+
+	fill_result(data, result, param);
 	if (data->flag == '-')
 		left_sort(result, data->max_len);
 	return (result);

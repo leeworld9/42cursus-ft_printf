@@ -6,48 +6,93 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:57:28 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/20 12:21:40 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/22 22:33:54 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "ft_printf.h"
 
-static char ft_uppercase(char c)
+static void	convert_hex(unsigned int num, char spec, char *param)
 {
-	if ('a' <= c && 'z' >= c)
-		c = c - 'a' + 'A';
-	return (c);
-}
+	int j;
 
-static int hex_print(unsigned int num, char format, int len)
-{
-	char remain;
-
-	if (num / 16 != 0)
-	{	
-		if (format == 'X')
-			remain = ft_uppercase("0123456789abcdef"[num % 16]);
-		else
-			remain = "0123456789abcdef"[num % 16];
-		len += hex_print(num / 16 , format, len);
-		ft_putchar_fd(remain, 1);
-	}
-	else
+	j = 0;
+	while(true)
 	{
-		if (format == 'X')
-			remain = ft_uppercase("0123456789abcdef"[num]);
+		if (num / 16 != 0)
+		{	
+			if (spec == 'X')
+				param[j] = ft_toupper("0123456789abcdef"[num % 16]);
+			else
+				param[j] = "0123456789abcdef"[num % 16];
+			num = num / 16;
+		}
 		else
-		remain = "0123456789abcdef"[num];
-		ft_putchar_fd(remain, 1);
+		{
+			if (spec == 'X')
+				param[j] = ft_toupper("0123456789abcdef"[num]);
+			else
+				param[j] = "0123456789abcdef"[num];
+			param[j + 1] = '\0';
+			break;
+		}
+		j++;
 	}
-	len++;
-	return (len);
 }
 
-int ft_printf_uxX(va_list ap, char *target, int i)
+static int	get_hex(t_printf *data, char spec)
 {
-	char *tmp;
+	char *param;
+	char *result;
+	
+	if ((param = (char *)malloc(sizeof(char) * (64/4 + 1))) == NULL)
+		return (0);
+	convert_hex((unsigned int)data->param, spec, param);
+	reverse_arr(param);
+	get_uxX_maxlen(data, ft_strlen(param));
+	if ((result = (char *)malloc(sizeof(char) * (data->max_len + 1))) == NULL)
+		return (0);
+	result[data->max_len] = '\0';
+	fill_chr(data, data->max_len, result, ' ');
+	result = uxX_exception(data, result, param);
+	ft_putstr_fd(result, 1);
+	free(param);
+	free(result);
+	return (data->max_len);
+}
+
+static int	show_result(t_printf *data, char *param, char spec)
+{
+	int		param_len;
+	char	*result;
+
+	if (spec == 'u')
+	{
+		param_len = ft_strlen(param);
+		get_uxX_maxlen(data, param_len);
+		if ((result = (char *)malloc(sizeof(char) * (data->max_len + 1))) == NULL)
+			return (0);
+		result[data->max_len] = '\0';
+		if (data->flag == '0' && data->pres == 0)
+			fill_chr(data, data->width, result, '0');
+		else
+			fill_chr(data, data->max_len, result, ' ');
+		result = uxX_exception(data, result, param); 
+		ft_putstr_fd(result, 1);
+		free(result);
+	}
+	else if (spec == 'x' || spec == 'X')
+	{
+		if ((data->max_len = get_hex(data, spec)) == 0)
+			return (0);
+	}
+	return (data->max_len);
+}
+
+static int	select_spec(va_list ap, t_printf *data, char *target, int i)
+{
+	char *param;
 	long long num;
 	int len;
 
@@ -62,14 +107,36 @@ int ft_printf_uxX(va_list ap, char *target, int i)
 			else if (num < 0)
 				num = UINT_MAX + num + 1;
 		}
-		tmp = ft_ltoa(num);
-		ft_putstr_fd(tmp, 1);
-		len += ft_strlen(tmp);
-		free(tmp);
+		param = ft_ltoa(num);
+		len += show_result(data, param, target[i]);
+		free(param);
 	}	
-	else if (target[i] == 'x')
-		len += hex_print(va_arg(ap, unsigned int), 'x', len);
-	else if (target[i] == 'X')
-		len += hex_print(va_arg(ap, unsigned int), 'X', len);
+	else if (target[i] == 'x' || target[i] == 'X')
+	{
+		data->param = va_arg(ap, unsigned int);
+		len += show_result(data, NULL, target[i]);
+	}
+		
+	return (len);
+}
+
+int ft_printf_uxX(va_list ap, char *target, int i)
+{
+	t_printf	*data;
+	int len;
+
+	len = 0;
+	if ((data = (t_printf *)malloc(sizeof(t_printf))) == NULL)
+		return (0);
+	data->tag = ft_substr(target, 1, i);
+	data->flag = '\0';
+	data->width = 0;
+	data->pres = -1;
+	get_flag(data);
+	get_width(ap, data);
+	get_pres(ap, data);
+	len += select_spec(ap, data, target, i);
+	free(data->tag);
+	free(data);
 	return (len);
 }

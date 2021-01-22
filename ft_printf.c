@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 10:50:59 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/21 21:03:05 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/22 19:58:08 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static int	print_format(char *target, va_list ap, int i)
 	else if (target[i] == 's')
 		len += ft_printf_s(ap, target, i);
 	else if (target[i] == 'p')
-		len += ft_printf_p(ap);
+		len += ft_printf_p(ap, target, i);
 	else if (target[i] == 'd' || target[i] == 'i')
 		len += ft_printf_di(ap, target, i);
 	else if (target[i] == 'u' || target[i] == 'x' || target[i] == 'X')

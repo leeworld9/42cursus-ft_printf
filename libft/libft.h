@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/31 08:27:26 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/04 07:48:08 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/22 20:01:42 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,7 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst,
 								void *(*f)(void *), void (*del)(void *));
+char				*ft_strcpy(char *dst, char const *src);
+char				*ft_ltoa(long long n);
 
 #endif

@@ -1,27 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_printf_p_utils.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/31 02:18:29 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/22 19:54:26 by dohelee          ###   ########.fr       */
+/*   Created: 2021/01/22 19:46:04 by dohelee           #+#    #+#             */
+/*   Updated: 2021/01/22 19:46:17 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char		*ft_strdup(const char *s)
-{
-	char	*dst;
-	size_t	len;
-
-	len = sizeof(char) * (unsigned long)ft_strlen(s) + 1;
-	dst = (char *)malloc(len);
-	if (dst != NULL)
-		ft_strcpy(dst, s);
-	else
-		return (NULL);
-	return (dst);
-}
