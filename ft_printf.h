@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 10:51:59 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/21 17:57:26 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/22 08:42:52 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ typedef struct	s_printf
 	int			width;
 	int			pres;
 	int			minus;
-	long long	param; //max값 처리 필요?
+	long long	param;
+	char		*strparam;
 	int			max_len;
 }				t_printf;
 
@@ -39,7 +40,7 @@ int ft_printf(const char *format, ...);
 
 //test
 int ft_printf_c(va_list ap);
-int ft_printf_s(va_list ap);
+int ft_printf_s(va_list ap, char *target, int i);
 int ft_printf_p(va_list ap);
 int ft_printf_di(va_list ap, char *target, int i);
 int ft_printf_uxX(va_list ap, char *target, int i);
@@ -56,9 +57,13 @@ void left_sort(char *result, int max_len);
 void get_maxlen(t_printf *data, int param_len);
 int	zero_flagchk(va_list ap, t_printf *data);
 
+//s utils
+void get_s_maxlen(t_printf *data, int param_len);
+void fill_s_result(t_printf *data, char *result, char *param);
 
 //exception
 char *di_exception(t_printf *data, char *result, char *param_abs);
+char *s_exception(t_printf *data, char *result);
 
 //etc
 char *ft_ltoa(long long n);

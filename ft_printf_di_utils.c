@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 15:03:22 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/21 18:53:02 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/21 21:26:55 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,17 @@ void	fill_chr(t_printf *data, int i, char *result, char chr)
 	}
 }
 
-void	fill_result(t_printf *data, char *result, char *param_abs)
+void	fill_result(t_printf *data, char *result, char *param)
 {
 	int i;
 	int j;
 	int len;
 
 	len = data->max_len - 1;
-	i = ft_strlen(param_abs);
+	i = ft_strlen(param);
 	while (i > 0)
 	{
-		result[len--] = param_abs[i - 1];
+		result[len--] = param[i - 1];
 		i--;
 	}
 	j = data->max_len - 1;
