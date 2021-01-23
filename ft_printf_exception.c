@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 12:50:29 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/23 14:21:46 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/23 14:27:49 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,11 @@ char	*s_exception(t_printf *data, char *result)
 
 char	*ux_exception(t_printf *data, char *result, char *param)
 {
+	fill_chr(data, data->pres, result, '0');
 	if (data->flag == '0' && data->pres == 0)
 		fill_chr(data, data->width, result, '0');
+	else if (data->max_len == data->pres)
+		fill_chr(data, data->max_len, result, '0');
 	else if (data->pres == -1)
 	{
 		if (data->width > 0 && *param == '0')
@@ -83,8 +86,12 @@ char	*p_exception(t_printf *data, char *result, char *param)
 
 char	*c_exception(t_printf *data, char *result, char *param)
 {
+	if (data->flag == '0')
+		fill_chr(data, data->width, result, '0');
+	else
+		fill_chr(data, data->max_len, result, ' ');
 	result[data->max_len - 1] = param[0];
 	if (data->flag == '-')
-		left_sort(result, data->max_len);
+		left_c_sort(result, data->max_len);
 	return (result);
 }
