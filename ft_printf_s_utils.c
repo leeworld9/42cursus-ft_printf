@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 21:01:07 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/23 13:52:01 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/23 14:52:04 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,12 @@ void	fill_s_result(t_printf *data, char *result, char *param)
 {
 	int len;
 	int max_len;
-	
+
 	max_len = data->max_len - 1;
 	if ((int)ft_strlen(param) >= data->pres)
 		len = data->pres - 1;
 	else
-		len =(int)ft_strlen(param) - 1;
+		len = (int)ft_strlen(param) - 1;
 	while (len != -1)
 	{
 		result[max_len] = param[len];

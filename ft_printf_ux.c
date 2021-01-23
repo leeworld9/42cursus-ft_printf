@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 13:46:56 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/23 14:21:15 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/23 15:29:07 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static void	convert_hex(unsigned int num, char spec, char *param)
 	int j;
 
 	j = 0;
-	while(true)
+	while (true)
 	{
 		if (num / 16 != 0)
-		{	
+		{
 			if (spec == 'X')
 				param[j] = ft_toupper("0123456789abcdef"[num % 16]);
 			else
@@ -34,7 +34,7 @@ static void	convert_hex(unsigned int num, char spec, char *param)
 			else
 				param[j] = "0123456789abcdef"[num];
 			param[j + 1] = '\0';
-			break;
+			break ;
 		}
 		j++;
 	}
@@ -44,8 +44,8 @@ static int	get_hex(t_printf *data, char spec)
 {
 	char *param;
 	char *result;
-	
-	if ((param = (char *)malloc(sizeof(char) * (64/4 + 1))) == NULL)
+
+	if ((param = (char *)malloc(sizeof(char) * (64 / 4 + 1))) == NULL)
 		return (0);
 	convert_hex((unsigned int)data->param, spec, param);
 	reverse_arr(param);
@@ -70,17 +70,10 @@ static int	show_result(t_printf *data, char *param, char spec)
 	{
 		param_len = ft_strlen(param);
 		get_ux_maxlen(data, param_len);
-		if ((result = (char *)malloc(sizeof(char) * (data->max_len + 1))) == NULL)
+		if ((result = malloc(sizeof(char) * (data->max_len + 1))) == NULL)
 			return (0);
 		result[data->max_len] = '\0';
-		if (data->flag == '0' && data->pres == 0)
-			fill_chr(data, data->width, result, '0');
-		else
-		{
-			fill_chr(data, data->max_len, result, ' ');
-			fill_chr(data, data->pres, result, '0');
-		}
-		result = ux_exception(data, result, param); 
+		result = ux_exception(data, result, param);
 		ft_putstr_fd(result, 1);
 		free(result);
 	}
@@ -94,9 +87,9 @@ static int	show_result(t_printf *data, char *param, char spec)
 
 static int	select_spec(va_list ap, t_printf *data, char *target, int i)
 {
-	char *param;
-	long long num;
-	int len;
+	char		*param;
+	long long	num;
+	int			len;
 
 	len = 0;
 	if (target[i] == 'u')
@@ -112,20 +105,19 @@ static int	select_spec(va_list ap, t_printf *data, char *target, int i)
 		param = ft_ltoa(num);
 		len += show_result(data, param, target[i]);
 		free(param);
-	}	
+	}
 	else if (target[i] == 'x' || target[i] == 'X')
 	{
 		data->param = va_arg(ap, unsigned int);
 		len += show_result(data, NULL, target[i]);
 	}
-		
 	return (len);
 }
 
-int ft_printf_ux(va_list ap, char *target, int i)
+int			ft_printf_ux(va_list ap, char *target, int i)
 {
 	t_printf	*data;
-	int len;
+	int			len;
 
 	len = 0;
 	if ((data = (t_printf *)malloc(sizeof(t_printf))) == NULL)

@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:57:36 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/23 13:08:49 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/23 15:27:36 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@ static int	show_result(t_printf *data)
 	if ((result = (char *)malloc(sizeof(char) * (data->max_len + 1))) == NULL)
 		return (0);
 	result[data->max_len] = '\0';
-	if (data->flag == '0' && data->pres == 0)
-		fill_chr(data, data->width, result, '0');
-	else
-	{
-		fill_chr(data, data->width, result, ' ');
-		fill_chr(data, data->pres, result, '0');
-	}
 	result = di_exception(data, result, param_abs);
 	ft_putstr_fd(result, 1);
 	free(param_abs);
