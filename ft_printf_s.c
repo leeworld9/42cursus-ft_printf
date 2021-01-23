@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:57:31 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/23 08:16:17 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/23 10:36:29 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,13 @@ static int	show_result(t_printf *data)
 	int		param_len;
 	char	*result;
 
+	if (data->str_param == NULL)
+		data->str_param = "(null)";
 	param_len = ft_strlen(data->str_param);
 	get_s_maxlen(data, param_len);
 	if ((result = (char *)malloc(sizeof(char) * (data->max_len + 1))) == NULL)
 		return (0);
 	result[data->max_len] = '\0';
-	// printf("w_after : %d, ", data->width);
-	// printf("p_after : %d, ", data->pres);
-	// printf("maxlen : %d, ", data->max_len);
-	// printf("parlen : %d", param_len);
 	if (data->flag == '0' && data->pres == 0)
 		fill_chr(data, data->width, result, '0');
 	else
@@ -55,16 +53,7 @@ int ft_printf_s(va_list ap, char *target, int i)
 	get_pres(ap, data);
 
 	data->str_param = va_arg(ap, char *);
-
-	if (data->str_param != NULL)
-	{
-		len += show_result(data);
-	}
-	else
-	{
-		ft_putstr_fd("(null)", 1);
-		len += ft_strlen("(null)");
-	}
+	len += show_result(data);
 	free(data->tag);
 	free(data);
 	return (len);

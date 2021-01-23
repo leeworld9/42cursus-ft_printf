@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 12:50:29 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/23 08:41:23 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/23 09:44:40 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,18 +95,8 @@ char	*p_exception(t_printf *data, char *result, char *param)
 
 char	*c_exception(t_printf *data, char *result, char *param)
 {
-	//printf("maxlen:%d\n" , data->max_len);
-	//반드시 data->pres(==-1, >0)만큼만 출력, (0)일때는 전부 출력
-	if (data->pres == -1 || data->pres > 0)
-	{
-		if (data->max_len != 0 && data->pres != -1)
-		{
-			fill_s_result(data, result, param);
-		}
-	}
-	else
-		fill_result(data, result, param);
 
+	fill_result(data, result, param);
 	if (data->flag == '-')
 		left_sort(result, data->max_len);
 	return (result);
