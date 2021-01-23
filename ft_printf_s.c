@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:57:31 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/23 10:36:29 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/23 14:15:58 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,16 @@ static int	show_result(t_printf *data)
 		fill_chr(data, data->width, result, '0');
 	else
 		fill_chr(data, data->max_len, result, ' ');
-	result = s_exception(data, result); 
-	//printf("\nflag : %c, param : %s, width : %d, pres : %d, max_len : %d, param_len : %d\n", data->flag, data->strparam, data->width, data->pres, data->max_len, param_len);
+	result = s_exception(data, result);
 	ft_putstr_fd(result, 1);
 	free(result);
 	return (data->max_len);
 }
 
-int ft_printf_s(va_list ap, char *target, int i)
+int			ft_printf_s(va_list ap, char *target, int i)
 {
 	t_printf	*data;
-	int len;
+	int			len;
 
 	len = 0;
 	if ((data = (t_printf *)malloc(sizeof(t_printf))) == NULL)
@@ -47,11 +46,9 @@ int ft_printf_s(va_list ap, char *target, int i)
 	data->flag = '\0';
 	data->width = 0;
 	data->pres = -1;
-
 	get_flag(data);
 	get_width(ap, data);
 	get_pres(ap, data);
-
 	data->str_param = va_arg(ap, char *);
 	len += show_result(data);
 	free(data->tag);

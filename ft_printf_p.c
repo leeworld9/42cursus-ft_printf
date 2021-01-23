@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:57:34 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/23 08:04:58 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/23 14:19:12 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	show_result(t_printf *data)
 	}
 	else
 		param = "0x0";
-	get_uxX_maxlen(data, ft_strlen(param));
+	get_p_maxlen(data, ft_strlen(param));
 	if ((result = (char *)malloc(sizeof(char) * (data->max_len + 1))) == NULL)
 		return (0);
 	result[data->max_len] = '\0';
