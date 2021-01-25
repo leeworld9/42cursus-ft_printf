@@ -6,13 +6,13 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 13:46:56 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/25 15:31:29 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 20:35:20 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	convert_hex(unsigned long long num, char spec, char *param)
+static void					convert_hex(unsigned long long num, char spec, char *param)
 {
 	int j;
 
@@ -40,7 +40,7 @@ static void	convert_hex(unsigned long long num, char spec, char *param)
 	}
 }
 
-static int	get_hex(t_printf *data, char spec)
+static int					get_hex(t_printf *data, char spec)
 {
 	char *param;
 	char *result;
@@ -64,7 +64,7 @@ static int	get_hex(t_printf *data, char spec)
 	return (data->max_len);
 }
 
-static int	show_result(t_printf *data, char *param, char spec)
+static int					show_result(t_printf *data, char *param, char spec)
 {
 	int		param_len;
 	char	*result;
@@ -85,36 +85,42 @@ static int	show_result(t_printf *data, char *param, char spec)
 	return (data->max_len);
 }
 
-static int	select_spec(va_list ap, t_printf *data, char *target, int i)
+static unsigned long long	ull_convert(va_list ap)
+{
+	long long	num;
+	
+	num = va_arg(ap, long long);
+	while (num < 0 || num > UINT_MAX)
+	{
+		if (num > UINT_MAX)
+			num = num - UINT_MAX - 1;
+		else if (num < 0)
+			num = UINT_MAX + num + 1;
+	}
+	return num;
+}
+
+static int					select_spec(va_list ap, t_printf *data, char *target, int i)
 {
 	char		*param;
-	long long	num;
 	int			len;
 
 	len = 0;
 	if (target[i] == 'u')
 	{
-		num = va_arg(ap, long long);
-		while (num < 0 || num > UINT_MAX)
-		{
-			if (num > UINT_MAX)
-				num = num - UINT_MAX - 1;
-			else if (num < 0)
-				num = UINT_MAX + num + 1;
-		}
-		param = ft_ltoa(num);
+		param = ft_ltoa(ull_convert(ap));
 		len += show_result(data, param, target[i]);
 		free(param);
 	}
 	else if (target[i] == 'x' || target[i] == 'X')
 	{
-		data->ull_param = va_arg(ap, unsigned long long);
+		data->ull_param = ull_convert(ap);
 		len += show_result(data, NULL, target[i]);
 	}
 	return (len);
 }
 
-int			ft_printf_ux(va_list ap, char *target, int i)
+int							ft_printf_ux(va_list ap, char *target, int i)
 {
 	t_printf	*data;
 	int			len;

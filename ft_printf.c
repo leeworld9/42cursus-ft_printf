@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 10:50:59 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/25 14:45:32 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 21:05:33 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,7 @@ static int	print_format(char *target, va_list ap, int i)
 	else if (target[i] == 'u' || target[i] == 'x' || target[i] == 'X')
 		len += ft_printf_ux(ap, target, i);
 	else if (target[i] == '%')
-	{
-		ft_putstr_fd("%", 1);
-		len++;
-	}
+		len += ft_printf_percent(ap, target, i);
 	return (len);
 }
 

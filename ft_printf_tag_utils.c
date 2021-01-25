@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 12:55:20 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/25 14:45:26 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 21:39:30 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,11 @@ void	get_flag(t_printf *data)
 	i = 0;
 	prec_idx = find_chr_idx(data->tag, '.');
 	tmp = (prec_idx != -1) ? ft_substr(data->tag, 0, prec_idx) : data->tag;
-	while (tmp[i] != '\0')
+	while (tmp[i] != '\0' && ft_strchr(FT_FLAG, tmp[i]) != NULL)
 	{
-		if (ft_strchr(FT_FLAG, tmp[i]) != NULL)
-		{
-			if ((data->flag) == '-')
-				break ;
-			data->flag = tmp[i];
-		}
+		if ((data->flag) == '-')
+			break ;
+		data->flag = tmp[i];
 		i++;
 	}
 	if (prec_idx != -1)
