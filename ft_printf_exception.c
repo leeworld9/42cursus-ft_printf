@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/18 12:50:29 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/23 15:56:49 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 14:52:57 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 char	*di_exception(t_printf *data, char *result, char *param_abs)
 {
-	if (data->flag == '0' && data->pres == 0)
+	if (data->flag == '0' && data->prec == 0)
 		fill_chr(data, data->width, result, '0');
 	else
 	{
 		fill_chr(data, data->width, result, ' ');
-		fill_chr(data, data->pres, result, '0');
+		fill_chr(data, data->prec, result, '0');
 	}
-	if (data->param == 0)
+	if (data->i_param == 0)
 	{
-		if (data->pres == -1 && data->width != 0)
+		if (data->prec == -1 && data->width != 0)
 			fill_result(data, result, "\0");
-		else if (data->pres == -1 && data->max_len == 1)
+		else if (data->prec == -1 && data->max_len == 1)
 		{
 			result[0] = '\0';
 			data->max_len--;
 		}
-		else if (data->pres == 0)
+		else if (data->prec == 0)
 			fill_result(data, result, "0");
 	}
 	else
@@ -42,13 +42,13 @@ char	*di_exception(t_printf *data, char *result, char *param_abs)
 
 char	*s_exception(t_printf *data, char *result)
 {
-	if (data->flag == '0' && data->pres == 0)
+	if (data->flag == '0' && data->prec == 0)
 		fill_chr(data, data->width, result, '0');
 	else
 		fill_chr(data, data->max_len, result, ' ');
-	if (data->pres == -1 || data->pres > 0)
+	if (data->prec == -1 || data->prec > 0)
 	{
-		if (data->max_len != 0 && data->pres != -1)
+		if (data->max_len != 0 && data->prec != -1)
 			fill_s_result(data, result, data->str_param);
 	}
 	else
@@ -60,14 +60,14 @@ char	*s_exception(t_printf *data, char *result)
 
 char	*ux_exception(t_printf *data, char *result, char *param)
 {
-	if (data->flag == '0' && data->pres == 0)
+	if (data->flag == '0' && data->prec == 0)
 		fill_chr(data, data->width, result, '0');
 	else
 	{
 		fill_chr(data, data->width, result, ' ');
-		fill_chr(data, data->pres, result, '0');
+		fill_chr(data, data->prec, result, '0');
 	}
-	if (data->pres == -1)
+	if (data->prec == -1)
 	{
 		if (data->width > 0 && *param == '0')
 		{
@@ -89,7 +89,7 @@ char	*ux_exception(t_printf *data, char *result, char *param)
 
 char	*p_exception(t_printf *data, char *result, char *param)
 {
-	if (data->flag == '0' && data->pres == 0)
+	if (data->flag == '0' && data->prec == 0)
 		fill_chr(data, data->width, result, '0');
 	else
 		fill_chr(data, data->max_len, result, ' ');
@@ -101,9 +101,9 @@ char	*p_exception(t_printf *data, char *result, char *param)
 
 char	*c_exception(t_printf *data, char *result, char *param)
 {
-	if (data->flag == '0')
-		fill_chr(data, data->width, result, '0');
-	else
+	// if (data->flag == '0')
+	// 	fill_chr(data, data->width, result, '0');
+	// else
 		fill_chr(data, data->max_len, result, ' ');
 	result[data->max_len - 1] = param[0];
 	if (data->flag == '-')

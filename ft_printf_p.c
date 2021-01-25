@@ -6,13 +6,13 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:57:34 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/23 15:28:23 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 15:32:53 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	convert_addr(unsigned int num, char *param)
+static void	convert_addr(unsigned long long num, char *param)
 {
 	int j;
 
@@ -43,17 +43,21 @@ static int	show_result(t_printf *data)
 
 	if (data->void_p != NULL)
 	{
-		data->param = (long long)data->void_p;
-		if ((param = (char *)malloc(sizeof(char) * (64 / 4 + 1))) == NULL)
+		data->ull_param = (unsigned long long)data->void_p;
+		if ((param = (char *)malloc(sizeof(void *) + 1)) == NULL)
 			return (0);
-		convert_addr((unsigned int)data->param, param);
+		convert_addr(data->ull_param, param);
 		reverse_arr(param);
 	}
 	else
 		param = "0x0";
 	get_p_maxlen(data, ft_strlen(param));
 	if ((result = (char *)malloc(sizeof(char) * (data->max_len + 1))) == NULL)
+	{
+		if (data->void_p != NULL)
+			free(param);
 		return (0);
+	}
 	result[data->max_len] = '\0';
 	result = p_exception(data, result, param);
 	ft_putstr_fd(result, 1);
@@ -74,10 +78,11 @@ int			ft_printf_p(va_list ap, char *target, int i)
 	data->tag = ft_substr(target, 1, i);
 	data->flag = '\0';
 	data->width = 0;
-	data->pres = -1;
+	data->prec = -1;
+	data->minus = 0;
 	get_flag(data);
 	get_width(ap, data);
-	get_pres(ap, data);
+	get_prec(ap, data);
 	data->void_p = va_arg(ap, void *);
 	len += show_result(data);
 	free(data->tag);

@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 12:55:20 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/23 15:53:43 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 14:45:26 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 void	get_flag(t_printf *data)
 {
 	char	*tmp;
-	int		pres_idx;
+	int		prec_idx;
 	int		i;
 
 	i = 0;
-	pres_idx = find_chr_idx(data->tag, '.');
-	tmp = (pres_idx != -1) ? ft_substr(data->tag, 0, pres_idx) : data->tag;
+	prec_idx = find_chr_idx(data->tag, '.');
+	tmp = (prec_idx != -1) ? ft_substr(data->tag, 0, prec_idx) : data->tag;
 	while (tmp[i] != '\0')
 	{
 		if (ft_strchr(FT_FLAG, tmp[i]) != NULL)
@@ -31,18 +31,18 @@ void	get_flag(t_printf *data)
 		}
 		i++;
 	}
-	if (pres_idx != -1)
+	if (prec_idx != -1)
 		free(tmp);
 }
 
 void	get_width(va_list ap, t_printf *data)
 {
-	int		pres_idx;
+	int		prec_idx;
 	char	*tmp;
 
-	if ((pres_idx = find_chr_idx(data->tag, '.')) != -1)
+	if ((prec_idx = find_chr_idx(data->tag, '.')) != -1)
 	{
-		tmp = ft_substr(data->tag, 0, pres_idx);
+		tmp = ft_substr(data->tag, 0, prec_idx);
 		if (ft_strchr(tmp, '*'))
 			data->width = zero_flagchk(ap, data);
 		else
@@ -58,7 +58,7 @@ void	get_width(va_list ap, t_printf *data)
 	}
 }
 
-void	get_pres(va_list ap, t_printf *data)
+void	get_prec(va_list ap, t_printf *data)
 {
 	char	*tmp;
 	int		p_i;
@@ -71,20 +71,20 @@ void	get_pres(va_list ap, t_printf *data)
 		tmp = ft_substr(data->tag, p_i + 1, ft_strlen(data->tag) - p_i - 2);
 		if (tmp[i] != '\0' && ft_strchr(tmp, '*'))
 		{
-			if ((data->pres = va_arg(ap, int)) == 0)
-				data->pres = -1;
-			else if (data->pres < 0)
-				data->pres = 0;
+			if ((data->prec = va_arg(ap, int)) == 0)
+				data->prec = -1;
+			else if (data->prec < 0)
+				data->prec = 0;
 		}
 		else
 		{
-			if ((data->pres = ft_atoi(flag_bypass(tmp))) <= 0)
-				data->pres = -1;
+			if ((data->prec = ft_atoi(flag_bypass(tmp))) <= 0)
+				data->prec = -1;
 		}
 		free(tmp);
 	}
 	else
-		data->pres = (p_i != -1) ? -1 : 0;
+		data->prec = (p_i != -1) ? -1 : 0;
 }
 
 char	*flag_bypass(char *str)

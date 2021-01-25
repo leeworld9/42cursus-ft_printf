@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:09:05 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/23 15:27:20 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 15:34:10 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	show_result(t_printf *data)
 	int		param_len;
 	char	*result;
 
-	param[0] = (char)data->param;
+	param[0] = (char)data->i_param;
 	param[1] = '\0';
 	param_len = ft_strlen(param);
 	get_c_maxlen(data, param_len);
@@ -42,9 +42,10 @@ int			ft_printf_c(va_list ap, char *target, int i)
 	data->tag = ft_substr(target, 1, i);
 	data->flag = '\0';
 	data->width = 0;
+	data->minus = 0;
 	get_flag(data);
 	get_width(ap, data);
-	data->param = va_arg(ap, int);
+	data->i_param = va_arg(ap, int);
 	len += show_result(data);
 	free(data->tag);
 	free(data);

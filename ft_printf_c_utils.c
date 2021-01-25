@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/23 08:31:44 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/23 13:59:30 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 14:52:41 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_c_putstr_fd(t_printf *data, char *result, int fd)
 
 	i = 0;
 	len = data->max_len;
-	if ((char)data->param == '\0')
+	if ((char)data->i_param == '\0')
 	{
 		while (len > 0)
 		{

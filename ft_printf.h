@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 10:51:59 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/23 14:49:38 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 14:56:19 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,19 @@
 
 # include "./libft/libft.h"
 
-typedef struct	s_printf
+typedef struct			s_printf
 {
-	char		*tag;
-	char		flag;
-	int			width;
-	int			pres;
-	int			minus;
-	long long	param;
-	char		*str_param;
-	void		*void_p;
-	int			max_len;
-}				t_printf;
+	char				*tag;
+	char				flag;
+	int					width;
+	int					prec;
+	int					minus;
+	int					i_param;
+	unsigned long long	ull_param;
+	char				*str_param;
+	void				*void_p;
+	int					max_len;
+}						t_printf;
 
 int				ft_printf(const char *format, ...);
 
@@ -45,7 +46,7 @@ int				ft_printf_ux(va_list ap, char *target, int i);
 
 void			get_flag(t_printf *data);
 void			get_width(va_list ap, t_printf *data);
-void			get_pres(va_list ap, t_printf *data);
+void			get_prec(va_list ap, t_printf *data);
 char			*flag_bypass(char *str);
 int				zero_flagchk(va_list ap, t_printf *data);
 

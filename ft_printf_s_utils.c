@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 21:01:07 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/23 14:52:04 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 14:45:24 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	get_s_maxlen(t_printf *data, int param_len)
 {
-	if (data->pres == 0)
+	if (data->prec == 0)
 	{
 		if (data->width >= param_len)
 			data->max_len = data->width;
@@ -23,14 +23,14 @@ void	get_s_maxlen(t_printf *data, int param_len)
 	}
 	else
 	{
-		if (param_len < data->width && param_len < data->pres)
+		if (param_len < data->width && param_len < data->prec)
 			data->max_len = data->width;
-		else if (data->width >= data->pres)
+		else if (data->width >= data->prec)
 			data->max_len = data->width;
-		else if (param_len < data->pres)
+		else if (param_len < data->prec)
 			data->max_len = param_len;
 		else
-			data->max_len = data->pres;
+			data->max_len = data->prec;
 	}
 }
 
@@ -40,8 +40,8 @@ void	fill_s_result(t_printf *data, char *result, char *param)
 	int max_len;
 
 	max_len = data->max_len - 1;
-	if ((int)ft_strlen(param) >= data->pres)
-		len = data->pres - 1;
+	if ((int)ft_strlen(param) >= data->prec)
+		len = data->prec - 1;
 	else
 		len = (int)ft_strlen(param) - 1;
 	while (len != -1)

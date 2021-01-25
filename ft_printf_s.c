@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:57:31 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/23 15:28:47 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 15:21:31 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ int			ft_printf_s(va_list ap, char *target, int i)
 	data->tag = ft_substr(target, 1, i);
 	data->flag = '\0';
 	data->width = 0;
-	data->pres = -1;
+	data->prec = -1;
+	data->minus = 0;
 	get_flag(data);
 	get_width(ap, data);
-	get_pres(ap, data);
+	get_prec(ap, data);
 	data->str_param = va_arg(ap, char *);
 	len += show_result(data);
 	free(data->tag);
