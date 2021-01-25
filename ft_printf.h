@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 10:51:59 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/25 22:24:10 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 23:27:48 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void					get_di_maxlen(t_printf *data, int param_len);
 void					get_s_maxlen(t_printf *data, int param_len);
 void					fill_s_result(t_printf *data, char *res, char *param);
 
+char					*ft_ltoa(long long n);
 unsigned long long		ull_convert(va_list ap);
 void					get_ux_maxlen(t_printf *data, int param_len);
 void					reverse_arr(char *arr);

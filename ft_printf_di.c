@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:57:36 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/25 15:33:49 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 23:25:34 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int	show_result(t_printf *data)
 	int		param_len;
 	char	*result;
 
-	param_abs = ft_ltoa(abs_convert(data->i_param));
+	param_abs = ft_itoa(abs_convert(data->i_param));
 	param_len = ft_strlen(param_abs);
 	get_di_maxlen(data, param_len);
 	if ((result = (char *)malloc(sizeof(char) * (data->max_len + 1))) == NULL)
