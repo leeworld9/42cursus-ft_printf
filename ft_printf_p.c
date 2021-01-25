@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:57:34 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/25 15:32:53 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 22:31:42 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,30 @@ static void	convert_addr(unsigned long long num, char *param)
 	}
 }
 
-static int	show_result(t_printf *data)
+static char	*point_value_chk(t_printf *data)
 {
 	char	*param;
-	char	*result;
 
 	if (data->void_p != NULL)
 	{
 		data->ull_param = (unsigned long long)data->void_p;
 		if ((param = (char *)malloc(sizeof(void *) + 1)) == NULL)
-			return (0);
+			return (NULL);
 		convert_addr(data->ull_param, param);
 		reverse_arr(param);
 	}
 	else
-		param = "0x0";
+		param = (data->prec == -1) ? "0x" : "0x0";
+	return (param);
+}
+
+static int	show_result(t_printf *data)
+{
+	char	*param;
+	char	*result;
+
+	if (point_value_chk(data) == NULL)
+		return (0);
 	get_p_maxlen(data, ft_strlen(param));
 	if ((result = (char *)malloc(sizeof(char) * (data->max_len + 1))) == NULL)
 	{

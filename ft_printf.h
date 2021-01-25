@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 10:51:59 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/25 21:05:14 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 22:24:10 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,9 @@ void					left_sort(char *result, int max_len);
 void					get_di_maxlen(t_printf *data, int param_len);
 
 void					get_s_maxlen(t_printf *data, int param_len);
-void					fill_s_result(t_printf *data, char *result, char *param);
+void					fill_s_result(t_printf *data, char *res, char *param);
 
+unsigned long long		ull_convert(va_list ap);
 void					get_ux_maxlen(t_printf *data, int param_len);
 void					reverse_arr(char *arr);
 
@@ -70,10 +71,10 @@ void					ft_c_putstr_fd(t_printf *data, char *result, int fd);
 
 void					get_p_maxlen(t_printf *data, int param_len);
 
-char					*di_exception(t_printf *data, char *result, char *param_abs);
-char					*s_exception(t_printf *data, char *result);
-char					*ux_exception(t_printf *data, char *result, char *param);
-char					*p_exception(t_printf *data, char *result, char *param);
-char					*c_exception(t_printf *data, char *result, char *param);
+char					*di_exception(t_printf *data, char *res, char *p_abs);
+char					*s_exception(t_printf *data, char *res);
+char					*ux_exception(t_printf *data, char *res, char *param);
+char					*p_exception(t_printf *data, char *res, char *param);
+char					*c_exception(t_printf *data, char *res, char *param);
 
 #endif

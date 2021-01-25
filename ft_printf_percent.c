@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 20:48:24 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/25 21:05:57 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 22:27:08 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ static int	show_result(t_printf *data)
 			result[len - 1] = ' ';
 		len--;
 	}
+	if (data->flag == '-')
+		left_sort(result, data->max_len);
 	ft_putstr_fd(result, 1);
 	free(result);
 	return (data->max_len);
