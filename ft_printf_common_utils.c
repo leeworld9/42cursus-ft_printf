@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 15:03:42 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/25 22:35:55 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 22:53:55 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,19 @@ void		fill_result(t_printf *data, char *result, char *param)
 	i = ft_strlen(param);
 	while (i > 0)
 	{
-		result[len--] = param[i - 1];
-		i--;
+		result[len--] = param[i-- - 1];
 	}
 	if (data->minus == 1)
 	{
 		j = data->max_len - 1;
 		while (j > 0 && data->minus == 1)
 		{
-			if (!ft_isdigit(result[j--]))
+			if (!ft_isdigit(result[j]))
 			{
 				result[j] = '-';
 				break ;
 			}
+			j--;
 		}
 		if (data->minus == 1 && !ft_strchr(result, '-'))
 			result[j] = '-';

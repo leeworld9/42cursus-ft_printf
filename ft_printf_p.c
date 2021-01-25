@@ -6,7 +6,7 @@
 /*   By: dohelee <dohelee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/15 12:57:34 by dohelee           #+#    #+#             */
-/*   Updated: 2021/01/25 22:31:42 by dohelee          ###   ########.fr       */
+/*   Updated: 2021/01/25 22:49:20 by dohelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	show_result(t_printf *data)
 	char	*param;
 	char	*result;
 
-	if (point_value_chk(data) == NULL)
+	if ((param = point_value_chk(data)) == NULL)
 		return (0);
 	get_p_maxlen(data, ft_strlen(param));
 	if ((result = (char *)malloc(sizeof(char) * (data->max_len + 1))) == NULL)
